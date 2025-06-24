@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SSE Listener</title>
+</head>
+<body>
+<h1>Listening for SSE Events</h1>
+<div id="events"></div>
+
+<script>
+    const eventSource = new EventSource("http://localhost:8080/events");
+
+    eventSource.onmessage = function(event) {
+        const eventData = JSON.parse(event.data);
+        console.log("Received event:", eventData);
+        document.getElementById("events").innerHTML += `<p>${eventData.name}</p>`;
+    };
+
+    eventSource.onerror = function() {
+        console.error("Error receiving SSE events.");
+        eventSource.close();
+    };
+</script>
+</body>
+</html>

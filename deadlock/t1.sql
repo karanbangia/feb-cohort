@@ -1,0 +1,1 @@
+SELECT * FROM seats WHERE id=1 FOR UPDATE;
